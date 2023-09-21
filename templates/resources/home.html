@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!---->
+
+{% block title %} {{block.super}} Home {% endblock title %}
+
+<!---->
+
+{% block content %}
+
+<h1><center>Welcome to ResourcesShare</center></h1>
+
+<p>{{cnt}} resources and counting!</p>
+
+<h3>All Users</h3>
+
+<p>{{user_cnt}} active users and counting!</p>
+
+<h3>Resources per Category</h3>
+<ol>
+  {% for res_cat in res_per_cat %}
+  <li>{{res_cat.cat_id__cat}}: {{res_cat.cnt}}</li>
+  {% endfor %}
+</ol>
+{% endblock content %}

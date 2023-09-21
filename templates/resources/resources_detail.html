@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+<!---->
+
+{% block title %} {{block.super}} Home {% endblock title %}
+
+<!---->
+
+{% block content %}
+<h1>{{res.title}}</h1>
+<p><b>User</b>: {{res.user_id.username}}</p>
+<p><b>Link</b>: {{res.link}}</p>
+<p><b>Description</b>: {{res.description}}</p>
+<p><b>Category</b>: {{res.cat_id.cat}}</p>
+<p><b>Tags</b>: {{res.all_tags}}</p>
+<p><b>Review</b>: {{review}}</p>
+<p><b>Average</b>: {{avg_rate}}</p>
+
+{% endblock content %}

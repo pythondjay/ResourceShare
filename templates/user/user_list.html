@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+<!---->
+
+{% block title %} {{block.super}} Home {% endblock title %}
+
+<!---->
+
+{% block content %}
+<span>We are proud of our {{ users|length }} users</span>
+
+<ul>
+  {% for user in users %}
+
+  <li>{% include 'includes/style_active_user.html' with data=user %}</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% load custom_filter %} {% if user.is_active %}
+
+<span class="active">{{ user.username|cap_all_but_upper_first }}</span>
+
+{% else %}
+
+<span class="inactive">{{ user.username|cap_all_but_upper_first }}</span>
+
+{% endif %}
