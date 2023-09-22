@@ -9,8 +9,11 @@ name: Django Test
 on:
   push:
     branches: ["dev"]
-  pull_request:
+  pull_request_target: # To be able to access the secrets during a pull request
     branches: ["dev"]
+    types: [opened] # run workflow only for opened pull requests
+    paths:
+      - "**.py"
 
 jobs:
   build:
