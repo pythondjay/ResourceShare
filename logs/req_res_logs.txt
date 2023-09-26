@@ -1,4 +1,0 @@
-
-2023-09-26 11:49:09,349 INFO log :: GET | testserver/ | text/plain | Mozilla/5.0
-2023-09-26 11:49:09,356 INFO log :: GET | testserver/ | text/plain | Mozilla/5.0
-2023-09-26 11:49:09,359 INFO log :: GET | testserver/resource/1 | text/plain | Mozilla/5.0
