@@ -2,12 +2,18 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView
 from rest_framework import viewsets
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from .models import Resources, Category
-from . import serializers
+from .serializers import serializers
 from . import mixins
+from . import permissions
 
 
 @api_view(["GET"])
+@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
 def list_resources(request):
     queryset = (
         Resources.objects.select_related("user_id", "cat_id")
@@ -50,6 +56,8 @@ def list_category(request):
 
 
 class ListResource(ListAPIView):
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = (
         Resources.objects.select_related("user_id", "cat_id")
         .prefetch_related("tag")
@@ -77,6 +85,8 @@ class DetailResource(RetrieveAPIView):
 
 
 class ResourceViewSets(viewsets.ModelViewSet):
+    permission_classes = (permissions.AuthorSuperOrReadOnly,)
+    permission_classes = (permissions.TwoWeeksOldObjectSuperOnly,)
     queryset = (
         Resources.objects.select_related("user_id", "cat_id")
         .prefetch_related("tag")
@@ -88,6 +98,7 @@ class ResourceViewSets(viewsets.ModelViewSet):
 class CategoryViewSets(
     mixins.DenyDeletionOfDefaultCategoryMixin, viewsets.ModelViewSet
 ):
+    permission_classes = (permissions.AuthorSuperOrReadOnly,)
     queryset = Category.objects.all()
     serializer_class = serializers.CategoryModelSerializer
 
@@ -95,12 +106,3 @@ class CategoryViewSets(
 class DeleteCategory(DestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = serializers.CategoryModelSerializer
-
-
-class FilterAdminResources:
-    queryset = (
-        Resources.objects.select_related("user_id", "cat_id")
-        .prefetch_related("tag")
-        .all()
-    )
-    serializer_class = serializers.ResourceModelSerializer

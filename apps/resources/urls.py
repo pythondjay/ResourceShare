@@ -34,11 +34,6 @@ api_urlpatterns = [
         api_views.DeleteCategory.as_view(),
         name="delete-category-class",
     ),
-    path(
-        "api/v3/resource",
-        api_views.FilterAdminResources,
-        name="filter-admin-resources",
-    ),
 ]
 
 urlpatterns = [

@@ -17,6 +17,7 @@ CUSTOM_APPS = ["apps.user", "apps.resources", "apps.core"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "rest_framework.authtoken",  # generate tables to manage tokens.
 ]
 
 INSTALLED_APPS = [*DEFAULT_APPS, *CUSTOM_APPS, *THIRD_PARTY_APPS]
@@ -50,6 +51,19 @@ TEMPLATES = [
         },
     },
 ]
+
+# REST_FRAMEWORKS = {
+# "DEFAULT_PERMISSION_CLASSES": [
+# "rest_framework.permissions.AllowAny",
+# ],
+# }
+
+# Authentication
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
 
 WSGI_APPLICATION = "config.wsgi.application"
 

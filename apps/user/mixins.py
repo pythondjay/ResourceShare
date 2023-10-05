@@ -1,4 +1,4 @@
-from . import serializers
+from .serializers import serializers
 
 
 class RestrictInactivateUsersMixin:
